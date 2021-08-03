@@ -23,7 +23,7 @@ async def on_ready():
     print("Online")
 
 
-@bot.command(name="shutdown_bot", description="Shuts down the bot", help="Requires permission in the bot files")
+@bot.command(name="shutdown_bot", help="Shuts down the bot", description="Requires permission in the bot files")
 async def shutdown_bot(ctx):
     role_names = [role.name for role in ctx.author.roles]  # List comp for getting the roles of the person doing command
     if bot_control_role in role_names or ctx.message.author.id in bot_admins:
@@ -55,13 +55,13 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-@bot.command(name="timestamp_now", description="Generates timestamp for the current time", help="Simple example timestamp")
+@bot.command(name="timestamp_now", help="Generates timestamp for the current time", description="Simple example timestamp")
 async def timestamp_now(ctx):
     unix = int(time.time())
     await ctx.send(f"Timestamp: <t:{unix}>\nRaw: `<t:{unix}>`")
 
 
-@bot.command(name="timestamp", description="Generates timestamp from time info", help="Takes a timezone, day, month, year, hour, minutes and optionally style to generate a timestamp for use in discord")
+@bot.command(name="timestamp", help="Generates timestamp from time info", description="Takes a timezone, day, month, year, hour, minutes and optionally style to generate a timestamp for use in discord")
 async def timestamp(ctx, utc: float, day: int, month: int, year: int, hour: int, minute: int, style: str = None):
     dt = datetime(year, month, day, hour, minute, 0, 0, timezone(timedelta(hours=utc)))
     unix = int(dt.timestamp())
